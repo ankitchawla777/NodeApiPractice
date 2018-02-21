@@ -8,5 +8,7 @@ mongoose.Promise=global.Promise;
 //         console.log(JSON.stringify(e))
 //     })
 // });
-mongoose.connect(process.env.MONGODB_URI); 
+mongoose.connect(process.env.MONGODB_URI).catch(e=>{
+    console.log(e);
+}); 
 module.exports={mongoose};

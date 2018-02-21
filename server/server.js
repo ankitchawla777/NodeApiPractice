@@ -1,17 +1,5 @@
-var env= process.env.NODE_ENV || 'development'
-console.log("***env:",env)
-
-if(env==='development')
-{
-    process.env.PORT=3000;
-    process.env.MONGODB_URI="mongodb://localhost:27017/TodoApp"
-}
-else if(env==='production')
-{
-    process.env.MONGODB_URI="mongodb://testuser:password777@ds227168.mlab.com:27168/testdb777"
-}
-
-const _=require('lodash')
+require('./config/config');
+const _=require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectId}= require('mongodb');
@@ -108,6 +96,18 @@ app.delete('/todos/:id', (req,res)=>{
     }).catch((e) => {
         res.status(400).send(e)
     })
+})
+
+//Users Section
+
+app.post('/users',(req,res)=>{
+    var body =_.pick(req.body,['email','password']);
+    var user = new User(body);
+user.save().then(()=>{
+    return user.generateAuthToken();
+}).then((token)=>{
+    res.header('x-auth',token).status(200).send(user);
+}).catch(e=>res.status(400).send(e));
 })
 
 app.listen(port, () => console.log(`started on port ${port}`));
