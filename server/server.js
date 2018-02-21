@@ -43,6 +43,7 @@ app.get('/todos/:id', (req, res) => {
 app.post('/todos', (req, res) => {
     var todo = new Todo({
         text: req.body.text
+        
     });
     todo.save().then((doc) => {
         res.status(200).send(doc);
@@ -52,11 +53,11 @@ app.post('/todos', (req, res) => {
     console.log(req.body);
 })
 
-app.put('/todos', (req, res) => {
+app.put('/todos/:id', (req, res) => {
 
 });
 
-app.delete('/todos', )
+app.delete('/todos/:id', )
 
 app.listen(port, () => console.log(`started on port ${port}`));
 
