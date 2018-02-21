@@ -1,3 +1,16 @@
+var env= process.env.NODE_ENV || 'development'
+console.log("***env:",env)
+
+if(env==='development')
+{
+    process.env.PORT=3000;
+    process.env.MONGODB_URI="mongodb://localhost:27017/TodoApp"
+}
+else ifenv==='production'()
+{
+    process.env.MONGODB_URI="mongodb://testuser:password777@ds227168.mlab.com:27168/testdb777"
+}
+
 const _=require('lodash')
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -7,7 +20,7 @@ const { mongoose } = require('./db/mongoose');
 const { Todo } = require('./model/todo');
 const { User } = require('./model/users');
 
-const port= process.env.PORT || 3000;
+const port= process.env.PORT ;
 
 var app = express();
 
