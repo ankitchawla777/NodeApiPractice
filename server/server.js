@@ -57,7 +57,7 @@ app.post('/todos', (req, res) => {
 
 app.patch('/todos/:id', (req, res) => {
     var id=req.params.id;
-    var body = _.pick(req.body,['text','completed'])
+    var body = _.pick(req.body,['text','desc','completed'])
     if(!ObjectId.isValid(id)){
         res.status(404).send();
     }
@@ -101,7 +101,7 @@ app.delete('/todos/:id', (req,res)=>{
 //Users Section
 
 app.post('/users',(req,res)=>{
-    var body =_.pick(req.body,['email','password']);
+    var body =_.pick(req.body,['email','phn','password']);
     var user = new User(body);
 user.save().then(()=>{
     return user.generateAuthToken();
