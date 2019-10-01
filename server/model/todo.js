@@ -6,6 +6,11 @@ var Todo=mongoose.model('Todo',{
         minlength: 1,
         trim: true
     },
+    desc:{
+        type:String,
+        required:false,
+        trim:true
+    }
     completed:{
         type:Boolean,
         default:false
